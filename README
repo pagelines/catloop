@@ -1,0 +1,14 @@
+CatLoop
+
+Description: 
+
+Drag and Drop section for the PageLines Framework. 
+It allows showing posts from a specific category (category A) in a static page. 
+The section can exclude posts in a specific category (category B). This feature was added to allow the exclusion of posts that are in the category of interest (category A but also appear in a Featured category (category B) used for displaying sliders/carousels on the same page as the category posts from category A.  
+
+IMPORTANT: It is not meant to be used in dynamic page templates such as Blog, Category, Archives, etc but in custom templates (Template 1, Template 2, Template 3 ... and user created templates such as page.example.php). 
+It has to be pulled in the Content section of the template. 
+
+It will copy the layout set in PageLines>Site Options>Blog and Posts (Magazine or Blog). It will not display a full-width post. 
+Only works with regular posts. 
+
