@@ -28,6 +28,9 @@ HOW TO USE THE CATLOOP
 
 All set!
 
+For support requests, please use the comment form on the demo page : 
+http://www.anthalis.dk/pagelines/
+
 == Changelog ==
 
 = 1.0 = 

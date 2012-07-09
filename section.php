@@ -40,6 +40,7 @@ class CatLoop extends PageLinesSection {
 		if ($paginate){
 		$this->anthalis_pagination();
 		}
+		wp_reset_query ();
 		}
 
  
