@@ -8,7 +8,8 @@ There is an optional pagination feature. You can use it or you can opt for the p
 
 The layout will be on one column content-wide (Blog Mode) or two columns (Magazine Mode), based on the settings in Blog and Posts. 
 
-NOTE: It will not display full-width posts at the top of the clips in Magazine Mode, only two columns.
+NOTE: It will not display full-width posts at the top of the clips in Magazine Mode, only two columns. It works only with regular posts<strong> not with custom post types. </strong>
+
 
 To use the section, you must place it in the Content area of a static page template (NOT in Blog, Category, Archives, Author, Tag). To learn how to create a new page template for your categories, read this <a href="http://www.anthalis.dk/setting-up-the-stuff-basic-pagelines-theme-and-page-template-creation/" target="_blank">easy tutorial</a>. 
 
