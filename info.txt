@@ -35,3 +35,6 @@ http://www.anthalis.dk/pagelines/
 
 = 1.0 = 
 * Initial release.
+
+= 1.1 =
+* Delete blank line in section.php
