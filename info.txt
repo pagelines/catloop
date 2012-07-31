@@ -11,24 +11,7 @@ The layout will be on one column content-wide (Blog Mode) or two columns (Magazi
 NOTE: It will not display full-width posts at the top of the clips in Magazine Mode, only two columns. It works only with regular posts<strong> not with custom post types. </strong>
 To use the section, you must place it in the Content area of a static page template (NOT in Blog, Category, Archives, Author, Tag). To learn how to create a new page template for your categories, read this <a href="http://www.anthalis.dk/setting-up-the-stuff-basic-pagelines-theme-and-page-template-creation/" target="_blank">easy tutorial</a>. 
 
-HOW TO USE THE CATLOOP
-1. Create a page and assign to it a static template. This static template can be one of the templates pre-defined in PageLines (Template 1, Template 2, and so on) or a template you created. See the link above for a short and easy tutorial on creating your page template. 
-2. Go to the drag and drop area of your PageLines settings. 
-3. Click on the template in which you want to place the CatLoop in the list of templates. 
-4. Click on the Template area. 
-5. If it is not already present, drag the Content section in it. 
-6. Click on Content. 
-7. Drag CatLoop in the Content area. 
-8. Go to the edit screen of the page that has this custom template assigned to it. Scroll down to PageLines Meta Settings. 
-9. Choose which category to display from the first drop-down menu. 
-10. Choose which category to exclude from the second drop-down menu. 
-11. Configure how the section will sort your posts and their order. 
-12. Enter the number of posts you want to show per page. 
-13. Mark the checkbox to enable the CatLoop pagination (optional). If you prefer to use the PageLines Post/Page Pagination section leave the checkbox unmarked. 
-
-All set!
-
-For more information about how to use CatLoop, comments, support requests visit <a href="http://www.anthalis.dk/easy-category-templates-in-pagelines-with-catloop-premium-section/" target="_blank">this post (opens in new tab/window).</a>
+For more information about <strong>how to use CatLoop, comments, support requests</strong> visit <a href="http://www.anthalis.dk/easy-category-templates-in-pagelines-with-catloop-premium-section/" target="_blank">this post.</a>  (opens in new tab/window)
 
 
 == Changelog ==
@@ -38,3 +21,6 @@ For more information about how to use CatLoop, comments, support requests visit 
 
 = 1.1 =
 * Delete blank line in section.php
+
+= 1.2 = 
+* Now also working with PageLines Lite

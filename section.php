@@ -4,13 +4,14 @@
 Section: CatLoop
 Author: Anca Enache
 Author URI: http://www.anthalis.dk
-Version: 1.1
+Version: 1.2
 Description: An easy to use drag & drop category loop
 Long: Pull it in the content area of a page template to convert it into a custom category page! Supports pagination, custom no. of post per page. Do not use with the Blog template or any other dynamic templates that appear under Pagelines Page Options.  
 Class Name: CatLoop
 Workswith: main 
 Cloning: false
 Demo: http://www.anthalis.dk/pagelines/
+External: http://www.anthalis.dk/easy-category-templates-in-pagelines-with-catloop-premium-section/
 */	
 class CatLoop extends PageLinesSection {
 
@@ -91,14 +92,12 @@ function anthalis_pagination($pages = '', $range = 1)
 						'selectvalues'	=> array(			
 															'categs'		=> array(
 																	'default'		=> '',
-																	'version'		=> 'pro',
 																	'type'			=> 'select',
 																	'selectvalues'	=> $this->get_categs(),
 																	'inputlabel'	=> __( 'Select Post Category', 'pagelines' ),
 																),
 															'catloop_exclude' => array(
 																	'default'		=> '',
-																	'version'		=> 'pro',
 																	'type'			=> 'select',
 																	'selectvalues'	=> $this->get_categs(),
 																	'inputlabel'	=> __( 'Select Post Category to exclude. Best used if you have a Featured category, which you want to display in a slider on the same page template. By excluding that category with this option you avoid post duplication.', 'pagelines' ),
@@ -106,7 +105,6 @@ function anthalis_pagination($pages = '', $range = 1)
 																
 															'catloop_orderby' => array(
 																	'default' => '',
-																	'version'	=> 'pro',
 																	'type' => 'select',
 																	'selectvalues' => array(
 																			'ID' 			=> array('name' => __( 'Post ID', 'pagelines' ) ),
@@ -120,7 +118,6 @@ function anthalis_pagination($pages = '', $range = 1)
 
 															'catloop_order' => array(
 																	'default'	=> '',
-																	'version'	=> 'pro',
 																	'type'		=> 'select',
 																	'selectvalues'	=> array(
 																			'DESC' 		=> array('name' => __( 'Descending', 'pagelines' ) ),
@@ -139,7 +136,6 @@ function anthalis_pagination($pages = '', $range = 1)
 																	
 															'showposts' => array (
 																	'default' 		=>'',
-																	'version'		=> 'pro',
 																	'type'			=> 'text',
 																	'inputlabel'	=> __( 'Type in the number of posts to show per page.', 'pagelines' ),
 																	),
@@ -147,7 +143,6 @@ function anthalis_pagination($pages = '', $range = 1)
 																	
 															'catloop_paginate' => array (
 																	'default'=>false,
-																	'version' => 'pro',
 																	'type'=> 'check',
 																	'inputlabel'=> __( 'Check this to apply the CatLoop pagination to the section (Optional) or you can also use the PageLines Post/Page Pagination section.','pagelines'
 																	),
