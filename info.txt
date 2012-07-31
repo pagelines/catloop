@@ -13,6 +13,7 @@ To use the section, you must place it in the Content area of a static page templ
 
 For more information about <strong>how to use CatLoop, comments, support requests</strong> visit <a href="http://www.anthalis.dk/easy-category-templates-in-pagelines-with-catloop-premium-section/" target="_blank">this post.</a>  (opens in new tab/window)
 
+<strong>Version 1.2 (released July 31, 2012) also works with PL Lite.</strong> 
 
 == Changelog ==
 
