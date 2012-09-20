@@ -25,3 +25,6 @@ For more information about <strong>how to use CatLoop, comments, support request
 
 = 1.2 = 
 * Now also working with PageLines Lite
+
+= 1.3 = 
+* For PageLines 2.3.
