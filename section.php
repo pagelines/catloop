@@ -55,8 +55,11 @@ class CatLoop extends PageLinesSection {
 		if ($paginate){
 		$this->anthalis_pagination();
 		}
-		wp_reset_query();
+		else {
+		pagelines_pagination();
 		}
+		wp_reset_query();
+		}		
 		
 function anthalis_pagination($pages = '', $range = 1) {
      $showitems = ($range * 2)+1;
