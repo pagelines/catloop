@@ -3,15 +3,15 @@
 =======
 Section: CatLoop
 Author: Anca Enache
-Author URI: http://www.anthalis.dk
-Version: 1.3.1
+Author URI: http://anthalis.me/
+Version: 1.3.2
 Description: An easy to use drag & drop category loop
 Long: Pull it in the content area of a page template to convert it into a custom category page! Supports pagination, custom no. of post per page. Do not use with the Blog template or any other dynamic templates that appear under Pagelines Page Options.  
 Class Name: CatLoop
 Workswith: main, templates
 Cloning: false
-Demo: http://www.anthalis.dk/pagelines/
-External: http://www.anthalis.dk/easy-category-templates-in-pagelines-with-catloop-premium-section/
+Demo: http://catloop.anthalis.info/quick-how-to-guide-demo/
+External: http://catloop.anthalis.info/documentation/
 */	
 class CatLoop extends PageLinesSection {
 
