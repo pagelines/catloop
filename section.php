@@ -28,7 +28,7 @@ class CatLoop extends PageLinesSection {
 		set_query_var( 'paged', $catloop_page );
 		$paged = $catloop_page;
 }
-		$postsperpage = ploption( 'showposts', $this->oset ) ? ploption( 'showposts', $this->oset ) : $postsperpage;
+		$postsperpage = ploption( 'showposts', $this->oset ) ? ploption( 'showposts', $this->oset ) : '';
 		$order = ploption ( 'catloop_order', $this->oset ) ? ploption ( 'catloop_order', $this->oset ) : '';
 		$orderby = ploption ( 'catloop_orderby', $this->oset ) ? $orderby = ploption ( 'catloop_orderby', $this->oset ) : '';
 		$source = ploption ( 'catloop_source', $this->oset ) ? ploption ( 'catloop_source', $this->oset ) : '';
