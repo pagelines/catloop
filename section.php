@@ -4,12 +4,12 @@
 Section: CatLoop
 Author: Anca Enache
 Author URI: http://anthalis.me/
-Version: 1.3.3
+Version: 1.3.4
 Description: An easy to use drag & drop category loop
 Long: Pull it in the content area of a page template to convert it into a custom category page! Supports pagination, custom no. of post per page. Do not use with the Blog template or any other dynamic templates that appear under Pagelines Page Options.  
 Class Name: CatLoop
 Workswith: main, templates
-Cloning: false
+Cloning: true
 Demo: http://catloop.anthalis.info/quick-how-to-guide-demo/
 External: http://catloop.anthalis.info/documentation/
 */	
@@ -97,26 +97,26 @@ function anthalis_pagination($pages = '', $range = 1) {
 			$page_metatab_array = array(
 						'catloop_regposts_opt' => array(
 						'type'		=> 'multi_option',
-						'title'		=> __('CatLoop Setup', 'pagelines'),
-						'shortexp'	=> __('Select the category you want to display in your CatLoop, the excluded category and the order of posts.', 'pagelines'),
+						'title'		=> __('CatLoop Setup', 'catloop'),
+						'shortexp'	=> __('Select the category you want to display in your CatLoop, the excluded category and the order of posts.', 'catloop'),
 						'selectvalues'	=> array(
 															'categs'		=> array(
 																	'default'		=> '',
 																	'type'			=> 'select',
 																	'selectvalues'	=> $this->get_categs(),
-																	'inputlabel'	=> __( 'Select category to include', 'pagelines' ),
+																	'inputlabel'	=> __( 'Select category to include', 'catloop' ),
 																),
 															'catloop_exclude' => array(
 																	'default'		=> '',
 																	'type'			=> 'select',
 																	'selectvalues'	=> $this->get_categs(),
-																	'inputlabel'	=> __( 'Select category to exclude.', 'pagelines' ),
+																	'inputlabel'	=> __( 'Select category to exclude.', 'catloop' ),
 																),
 																
 															'catloop_all' => array (
 																	'default'=>'',
 																	'type'=> 'check',
-																	'inputlabel'=> __( 'Show only posts added exclusively to parent categories. Explanation: By default, a category listing in WordPress will show all posts filed under a main category, including posts in child and grandchild category that have not been added specifically in the main category. Provided you have posts in a parent category called Fruit and you do not want to show posts from the child category Apples, enable this option. NOTE: It will show posts from the child category if they are added to both the parent and the child category.','pagelines' ),
+																	'inputlabel'=> __( 'Show only posts added exclusively to parent categories. Explanation: By default, a category listing in WordPress will show all posts filed under a main category, including posts in child and grandchild category that have not been added specifically in the main category. Provided you have posts in a parent category called Fruit and you do not want to show posts from the child category Apples, enable this option. NOTE: It will show posts from the child category if they are added to both the parent and the child category.','catloop' ),
 																	),
 																	),
 																	
@@ -125,18 +125,18 @@ function anthalis_pagination($pages = '', $range = 1) {
 																
 						'catloop_order_opt' => array(
 						'type'		=> 'multi_option',
-						'title'		=> __('Post order options', 'pagelines'),
-						'shortexp'	=> __('Set up the order of the posts.', 'pagelines'),
+						'title'		=> __('Post order options', 'catloop'),
+						'shortexp'	=> __('Set up the order of the posts.', 'catloop'),
 						'selectvalues'	=> array(
 															'catloop_orderby' => array(
 																	'default' => '',
 																	'type' => 'select',
 																	'selectvalues' => array(
-																			'ID' 			=> array('name' => __( 'Post ID', 'pagelines' ) ),
-																			'title' 		=> array('name' => __( 'Title', 'pagelines' ) ),
-																			'date' 			=> array('name' => __( 'Date', 'pagelines' ) ),
-																			'modified' 		=> array('name' => __( 'Last Modified', 'pagelines' ) ),
-																			'rand' 			=> array('name' => __( 'Random', 'pagelines' ) ),							
+																			'ID' 			=> array('name' => __( 'Post ID', 'catloop' ) ),
+																			'title' 		=> array('name' => __( 'Title', 'catloop' ) ),
+																			'date' 			=> array('name' => __( 'Date', 'catloop' ) ),
+																			'modified' 		=> array('name' => __( 'Last Modified', 'catloop' ) ),
+																			'rand' 			=> array('name' => __( 'Random', 'catloop' ) ),							
 																			),
 																	'inputlabel'	=> __( 'Order posts by...', 'pagelines' ),
 																),
@@ -145,8 +145,8 @@ function anthalis_pagination($pages = '', $range = 1) {
 																	'default'	=> '',
 																	'type'		=> 'select',
 																	'selectvalues'	=> array(
-																			'DESC' 		=> array('name' => __( 'Descending', 'pagelines' ) ),
-																			'ASC' 		=> array('name' => __( 'Ascending', 'pagelines' ) ),
+																			'DESC' 		=> array('name' => __( 'Descending', 'catloop' ) ),
+																			'ASC' 		=> array('name' => __( 'Ascending', 'catloop' ) ),
 																			),
 																	'inputlabel'	=> __( 'Select sort order.', 'pagelines' ),
 																	),
@@ -154,20 +154,20 @@ function anthalis_pagination($pages = '', $range = 1) {
 ),
 						'catloop_pag_opt' => array(
 						'type'		=> 'multi_option', 
-						'title'		=> __('Results Pagination Setup', 'pagelines'), 
-						'shortexp'	=> __('Set up the number of posts per page. You can use the optional pagination or the PL pagination section. ', 'pagelines'),
+						'title'		=> __('Results Pagination Setup', 'catloop'), 
+						'shortexp'	=> __('Set up the number of posts per page. You can use the optional pagination or the PL pagination section. ', 'catloop'),
 						'selectvalues'	=> array(	
 																	
 															'showposts' => array (
 																	'default' 		=>'',
 																	'type'			=> 'text',
-																	'inputlabel'	=> __( 'Type in the number of posts to show per page.', 'pagelines' ),
+																	'inputlabel'	=> __( 'Type in the number of posts to show per page.', 'catloop' ),
 																	),
 															
 															'catloop_paginate' => array (
 																	'default'=>false,
 																	'type'=> 'check',
-																	'inputlabel'=> __( 'If you want to paginate your category posts, enable this option.','pagelines'
+																	'inputlabel'=> __( 'If you want to paginate your category posts, enable this option.','catloop'
 																	),
 																	),															
 ),
@@ -177,7 +177,7 @@ function anthalis_pagination($pages = '', $range = 1) {
 			
 			$metatab_settings = array(
 					'id' 		=> 'catloop_meta',
-					'name' 		=> __( 'CatLoop', 'pagelines' ),
+					'name' 		=> __( 'CatLoop', 'catloop' ),
 					'icon' 		=> $this->icon, 
 					'clone_id'	=> $settings['clone_id'], 
 					'active'	=> $settings['active']
