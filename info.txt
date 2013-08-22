@@ -1,36 +1,12 @@
 == Description ==
 
-CatLoop allows you to display posts from a specific category in a static page template (Template 1, Template 2, etc. or your own custom page templates). 
+CatLoop allows you to display posts from specific categories in a static page template (Template 1, Template 2, etc. or your own custom page templates). 
 
-You can choose the category you want to display posts from, the number of posts per page, sorting and order, while also being able to exclude posts from another category (i.e. show News, but exclude posts that are in both News and Featured News). 
+You can choose the categories you want to display posts from, the number of posts per page, post offset, sorting method and order, while also being able to exclude posts from another set of categories (i.e. show News, but exclude posts that are in both News and Featured News). 
 
-There is an optional pagination feature. You can use it or you can opt for the pagination in PageLines. 
+You can choose not to show pagination. If you want to show pagination, you can use the default PageLines Pagination (if not using the offset posts feature) or the CatLoop pagination (if using offset to hide the first n posts). 
 
-The layout will be on one column content-wide (Blog Mode) or two columns (Magazine Mode), based on the settings in Blog and Posts. 
+The layout will be on one column content-wide (Blog Mode) or two columns (Magazine Mode), based on the individual settings for each CatLoop clone. 
 
-NOTE: It will not display full-width posts at the top of the clips in Magazine Mode, only two columns. It works only with regular posts<strong> not with custom post types. </strong>
-To use the section, you must place it in the Content area of a static page template (NOT in Blog, Category, Archives, Author, Tag). To learn how to create a new page template for your categories, read this <a href="http://catloop.anthalis.info/creating-a-child-theme-and-custom-page-templates/" target="_blank">easy tutorial</a>. 
+NOTE: It will not display full-width posts at the top of the clips in Magazine Mode, only two columns. It works only with regular posts<strong> not with custom post types. </strong> 
 
-Works with PL Lite.
-
-== Changelog ==
-= 1.3.3 =
-Changed link to tutorial about creating custom page templates.
-
-= 1.3.2 =
-Changed demo and documentation links.
-
-= 1.3.1 =
-Fixed issue with native PageLines pagination not showing up.
-
-= 1.3 = 
-* For PageLines 2.3.
-
-= 1.2 = 
-* Now also working with PageLines Lite
-
-= 1.1 =
-* Delete blank line in section.php
-
-= 1.0 = 
-* Initial release.
