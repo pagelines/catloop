@@ -13,11 +13,11 @@ Cloning: true
 */	
 class CatLoop extends PageLinesSection {
 
-	var $clone_id; 
+	var $clone_id = 'catloop_meta';
 
 function before_section_template( $location = '' ) {
 
-		if (ploption( 'blog_layout_mode', $this->oset ) == 'magazine') {
+		if (ploption('blog_layout_mode', $this->oset ) == 'magazine') {
 			$this->wrapper_classes[] = 'multi-post';
 		}
 		else {
@@ -26,7 +26,8 @@ function before_section_template( $location = '' ) {
 	}	
 
 
-	function section_optionator( $settings ){
+	function section_optionator( $clone_id ){
+		$settings = wp_parse_args( $clone_id, $this->optionator_default );
 			$page_metatab_array = array(
 						'cloop_headings' => array(
 							'title' => __('CatLoop Title', 'catloop'),
@@ -196,7 +197,7 @@ function before_section_template( $location = '' ) {
 						'excerpts_config' => array(
 								'title' 	=> __( 'Excerpts', 'catloop' ),
 								'type'		=> 'multi_option',
-								'exp' => 	__( 'Excerpts are set to 55 words by default, but you can customise the length here for every instance of CatLoop. <br />By default WordPress strips all HTML tags from excerpts. You can use this option to allow certain tags. Simply enter the allowed tags in this field. <strong>Separate them by comma.</strong> <br/>Examples of allowed tags: <strong>&lt;i&gt; for icons, &lt;br&gt; for line breaks, &lt;a&gt; for links</strong>.', 'catloop' ),	
+								'exp' => 	__( 'Excerpts are set to 55 words by default, but you can customise the length here for every instance of CatLoop. <br />By default WordPress strips all HTML tags from excerpts. You can use this option to allow certain tags. Simply enter the allowed tags in this field. Separate them by comma.<br/>Examples of allowed tags: &lt;i&gt; for icons, &lt;br&gt; for line breaks, &lt;a&gt; for links.', 'catloop' ),	
 								'selectvalues'		=> array(
 								
 										'hide_excerpt' => array(
@@ -218,7 +219,7 @@ function before_section_template( $location = '' ) {
 						'read_more_config' => array(
 								'title' => __('The Read More Link', 'catloop'),
 								'type'	=> 'multi_option',
-								'exp' =>  __( 'This text will be used as the link to your full article when viewing articles on your posts page (when excerpts are turned on). It supports font icons if added as with html tags. For instance, adding a Fast Forward icon after the link would be done with: <strong>My Custom Read More &lt;i class="icon-fast-forward"&gt; &lt;/i&gt <br />To apply classes, simply add your class name, without dots, commas or anything else. If you want to make the link a big red button, just use <strong>btn btn-large btn-important</strong>.', 'catloop' ),
+								'exp' =>  __( 'This text will be used as the link to your full article when viewing articles on your posts page (when excerpts are turned on). It supports font icons if added as with html tags. For instance, adding a Fast Forward icon after the link would be done with: My Custom Read More &lt;i class="icon-fast-forward"&gt; &lt;/i&gt <br />To apply classes, simply add your class name, without dots, commas or anything else. If you want to make the link a big red button, just use btn btn-large btn-important.', 'catloop' ),
 									'selectvalues'	=> array(
 										'continue_reading_text' => array(
 													'default'	=> __( 'Read More &raquo;', 'catloop' ),
@@ -268,13 +269,13 @@ function before_section_template( $location = '' ) {
 				 							'inputlabel'			=> __( 'Choose which pagination to use, if any.', 'catloop')
 				 							)
 			);
-			$settings = wp_parse_args( $settings, ploptionionator_default );
+			
 			
 			$metatab_settings = array(
 					'id' 		=> 'catloop_meta',
 					'name' 		=> __( 'CatLoop', 'catloop' ),
-					'icon' 		=> $this->icon, 
-					'clone_id'	=> $settings['clone_id'], 
+					'icon' 		=> $this->icon,
+					'clone_id'	=> $settings['clone_id'],
 					'active'	=> $settings['active']
 				);
 
@@ -284,153 +285,9 @@ function before_section_template( $location = '' ) {
 	    
 		
 		
-function anthalis_pagination($pages = '', $range = 1) {
 
-     	$showitems = ($range * 2)+1;
-     	
-	 	global $paged;
-	 	
-	 	$postsperpage = ploption( 'showposts', $this->oset ) ? ploption( 'showposts', $this->oset ) : '';
-	 	
-	 	$offby = ploption( 'offset', $this->oset ) ? ploption( 'offset', $this->oset ) : '';
-	 	
-	 	$page_offset = $offby + ( ($paged-1) * $postsperpage );	
-	 	
-	 	if(empty($paged)){
-	 		$paged = 1;
-	 	}
-
-	 	if($pages == ''){
-         	global $wp_query;
-
-         	if ($postsperpage) {
-         		$maxpages = ($wp_query->found_posts-$offby)/$postsperpage;
-		 		$pages = ceil ($maxpages);
-         	}
-         	
-		 	if (!$postsperpage) {
-         		$maxpages = ($wp_query->found_posts-$offby)/1;
-		 		$pages = ceil ($maxpages);
-         	}
-		 	
-		 if(!$pages){  
-		        $pages = 1;
-			}
-		 }
-		 
-		 if(1 != $pages){
-         	$clone = $this->meta[ 'clone' ]; 
-	        echo "<div class=\"cloop-$clone pagination\"><span>Page ".$paged." of ".$pages."</span>";
-         
-        	if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
-         
-        	if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a>";
-         
-        	for ($i=1; $i <= $pages; $i++){
-         
-             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
-             
-                echo ($paged == $i)? "<span class=\"current\">".$i."</span>":"<a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a>";
-                 
-             }
-             
-         }
-         
-         if ($paged < $pages && $showitems < $pages) echo "<a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a>";
-         
-         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
-         
-         echo "</div>\n";
-		
-        $paged_bg_color = pl_hashify(ploption( 'paged_bg_color', $this->tset ));
-  		$paged_link_color = pl_hashify(ploption( 'paged_link_color', $this->tset ));
-  		$pages_bg_color = pl_hashify(ploption( 'pages_bg_color', $this->tset ));
-  		$pages_link_color = pl_hashify(ploption( 'pages_link_color', $this->tset ));
-            ?>
-            <style type="text/css">
-            				.cloop-<?php echo $clone;?> {
-									clear:both;
-									padding:20px 0;
-									position:relative;
-									font-size:13px;
-									line-height:13px;
-							}
-              				.cloop-<?php echo $clone;?> span, .cloop-<?php echo $clone;?> a {
-									color:<?php echo $pages_link_color;?>;
-									background:<?php echo $pages_bg_color;?>;
-									display:block;
-									float:left;
-									margin: 2px 2px 2px 0;
-									padding:6px 9px 5px 9px;
-									text-decoration:none;
-									width:auto;
-  									
-							}
-							.cloop-<?php echo $clone;?> a:hover{
-									color:<?php echo $paged_link_color;?>;
-									background: <?php echo $paged_bg_color;?>;
-							}
-							.cloop-<?php echo $clone;?> .current{
-									padding:6px 9px 5px 9px;
-									background: <?php echo $paged_link_color;?>;
-									color:<?php echo $paged_bg_color;?>;		
-							}		
-							
-
-            </style>  
-            <?php 
-
-     }  
-	 }
-	 
-		
-function get_categs() {
-			
-	   $cats = get_categories();
 	   
-	   foreach( $cats as $cat )
-	   
-	      $categories[ $cat->cat_ID ] = array( 'name' => $cat->name );
-	      
-	   return ( isset( $categories) ) ? $categories : array();
-	   
-	}
-	
-function catloop_excerpt($text){
-	$allowed_tags = (ploption('excerpt_tags')) ? ploption('excerpt_tags') : '';
-	$excerpt_word_count = (ploption('excerpt_len')) ? ploption('excerpt_len') : 55;
-		
-	$raw_excerpt = $text;
-	if ( '' == $text ) {
-    //Retrieve the post content. 
-    $text = get_the_content('');
- 
-    //Delete all shortcode tags from the content. 
-    $text = strip_shortcodes( $text );
- 
-    $text = apply_filters('the_content', $text);
-    $text = str_replace(']]>', ']]&gt;', $text);
-     
-    $text = strip_tags($text, $allowed_tags);
-    $excerpt_length = apply_filters('excerpt_length', $excerpt_word_count); 
-
-    $excerpt_end = '...'; /*** MODIFY THIS. change the excerpt endind to something else.***/
-    $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end); 
-     
-    $words = preg_split("/[\n\r\t ]+/", $text, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
-    if ( count($words) > $excerpt_length ) {
-        array_pop($words);
-        $text = implode(' ', $words);
-        $text = $text . $excerpt_more;
-    } else {
-        $text = implode(' ', $words);
-    }
-}
-return apply_filters('wp_trim_excerpt', $text, $raw_excerpt);
-
-	}
-	   
-function section_template() {
+function section_template($clone_id) {
 			
 		global $pagelines_layout;
 		global $post;
@@ -477,15 +334,7 @@ function section_template() {
 		$paginate = ploption( 'catloop_paginate', $this->oset ) ? ploption( 'catloop_paginate', $this->oset ) : '';
 		
 		$offby = ploption( 'offset', $this->oset ) ? ploption( 'offset', $this->oset ) : '';
-
-		
-		//Display notice to set up categories
 			
-			if( !$category ){
-	
-				echo setup_section_notify( $this, 'Set up the CatLoop to activate' );
-				return;
-			}
 		
 		//Make conversions to avoid errors and warnings
 		if (isset($category)) {
@@ -618,7 +467,98 @@ function section_template() {
 		
 		if ($paginate == 'cl_paged'){
 		
-		$this->anthalis_pagination();
+				$range = 1;
+				$pages = '';
+     			$showitems = ($range * 2)+1;
+     	
+	 			global $paged;
+	 	
+	 			$page_offset = $offby + ( ($paged-1) * $postsperpage );	
+	 	
+	 			if(empty($paged)){
+	 				$paged = 1;
+	 			}
+
+	 			if($pages == ''){
+         			global $wp_query;
+
+         			if ($postsperpage) {
+         				$maxpages = ($wp_query->found_posts-$offby)/$postsperpage;
+		 				$pages = ceil ($maxpages);
+         			}
+         	
+		 			if (!$postsperpage) {
+         				$pages = $wp_query->max_num_pages;
+         			}
+		 	
+		 			if(!$pages){  
+		        		$pages = 1;
+					}
+		 		}
+		
+		 		if(1 != $pages){
+         	
+	        		echo "<div class=\"cloop-$clone_id pagination\"><span>Page ".$paged." of ".$pages."</span>";
+         
+        			if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
+         
+        			if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a>";
+         
+        			for ($i=1; $i <= $pages; $i++){
+         
+             			if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems )){
+             
+                			echo ($paged == $i)? "<span class=\"current\">".$i."</span>":"<a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a>";
+                 
+             			}
+             
+         			}
+         
+         if ($paged < $pages && $showitems < $pages) echo "<a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a>";
+         
+         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
+         
+         echo "</div>\n";
+		
+        	$paged_bg_color = pl_hashify(ploption( 'paged_bg_color', $this->oset ));
+  			$paged_link_color = pl_hashify(ploption( 'paged_link_color', $this->oset ));
+  			$pages_bg_color = pl_hashify(ploption( 'pages_bg_color', $this->oset ));
+  			$pages_link_color = pl_hashify(ploption( 'pages_link_color', $this->oset ));
+            	?>
+           		 <style type="text/css">
+            				.cloop-<?php echo $clone_id ?> {
+									clear:both;
+									padding:20px 0;
+									position:relative;
+									font-size:13px;
+									line-height:13px;
+							}
+              				.cloop-<?php echo $clone_id ?> span, .cloop-<?php echo $clone_id ?> a {
+									color:<?php echo $pages_link_color;?>;
+									background:<?php echo $pages_bg_color;?>;
+									display:block;
+									float:left;
+									margin: 2px 2px 2px 0;
+									padding:6px 9px 5px 9px;
+									text-decoration:none;
+									width:auto;
+  									
+							}
+							.cloop-<?php echo $clone_id ?> a:hover{
+									color:<?php echo $paged_link_color;?>;
+									background: <?php echo $paged_bg_color;?>;
+							}
+							.cloop-<?php echo $clone_id ?> .current{
+									padding:6px 9px 5px 9px;
+									background: <?php echo $paged_link_color;?>;
+									color:<?php echo $paged_bg_color;?>;		
+							}		
+							
+
+           		 </style>  
+            <?php 
+
+     } 
 		
 		}
 		if ($paginate == 'pl_paged') {
@@ -635,6 +575,54 @@ function section_template() {
 		wp_reset_query();	//put everything back to how it was
 		
 		}
+
+	 
+		
+function get_categs() {
+			
+	   $cats = get_categories();
+	   
+	   foreach( $cats as $cat )
+	   
+	      $categories[ $cat->cat_ID ] = array( 'name' => $cat->name );
+	      
+	   return ( isset( $categories) ) ? $categories : array();
+	   
+	}
+	
+function catloop_excerpt($text){
+	$allowed_tags = (ploption('excerpt_tags', $this->oset )) ? ploption('excerpt_tags',$this->oset ) : '';
+	$excerpt_word_count = (ploption('excerpt_len',$this->oset )) ? ploption('excerpt_len', $this->oset ) : 55;
+		
+	$raw_excerpt = $text;
+	if ( '' == $text ) {
+    //Retrieve the post content. 
+    $text = get_the_content('');
+ 
+    //Delete all shortcode tags from the content. 
+    $text = strip_shortcodes( $text );
+ 
+    $text = apply_filters('the_content', $text);
+    $text = str_replace(']]>', ']]&gt;', $text);
+     
+    $text = strip_tags($text, $allowed_tags);
+    $excerpt_length = apply_filters('excerpt_length', $excerpt_word_count); 
+
+    $excerpt_end = '...'; /*** MODIFY THIS. change the excerpt endind to something else.***/
+    $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end); 
+     
+    $words = preg_split("/[\n\r\t ]+/", $text, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
+    if ( count($words) > $excerpt_length ) {
+        array_pop($words);
+        $text = implode(' ', $words);
+        $text = $text . $excerpt_more;
+    } else {
+        $text = implode(' ', $words);
+    }
+}
+return apply_filters('wp_trim_excerpt', $text, $raw_excerpt);
+
+	}		
 
 function catloop_section_heading(){
 	$catloop_heading = ploption( 'catloop_heading', $this->oset ) ? ploption( 'catloop_heading', $this->oset ) : 'CatLoop Heading';
@@ -663,7 +651,7 @@ function catloop_post_entry(){
 
 		if( $this->catloop_show_content( $id ) ){
 
-			$excerpt_mode = (ploption( 'excerpt_mode_full' )) ? ploption( 'excerpt_mode_full' ) : 'top';
+			$excerpt_mode = (ploption( 'excerpt_mode_full', $this->oset  )) ? ploption( 'excerpt_mode_full', $this->oset  ) : 'top';
 
 
 			if( ( $excerpt_mode == 'left-excerpt' || $excerpt_mode == 'right-excerpt' ) && is_single() && $this->catloop_show_thumb( $id ) )
@@ -682,7 +670,7 @@ function catloop_post_entry(){
 
 function catloop_post_content(){
 
-		$cr_link = ploption('continue_reading_text');
+		$cr_link = ploption('continue_reading_text', $this->oset );
 		
 		$this->continue_reading = ($cr_link) ? $cr_link : __('Read More &raquo;', 'catloop');
 		
@@ -712,7 +700,7 @@ function catloop_post_header( $format = '' ){
 
 			$id = get_the_ID();
 
-			$excerpt_mode = ( $format == 'clip' ) ? ploption( 'excerpt_mode_clip' ) : ploption( 'excerpt_mode_full' );
+			$excerpt_mode = ( $format == 'clip' ) ? ploption( 'excerpt_mode_clip', $this->oset ) : ploption( 'excerpt_mode_full', $this->oset  );
 			
 			$excerpt_mode = ( $excerpt_mode ) ? $excerpt_mode : 'top';
 			
@@ -801,11 +789,11 @@ function catloop_get_post_metabar( $format = '' ) {
 
 		if( $format == 'clip'){
 
-			$metabar = ( ploption( 'metabar_clip' ) ) ? $before . ploption( 'metabar_clip' ) . $after : sprintf( '%s%s [post_date] %s [post_author_posts_link] [post_edit]%s', $before, __('On','catloop'), __('By','catloop'), $after );
+			$metabar = ( ploption( 'metabar_clip', $this->oset ) ) ? $before . ploption( 'metabar_clip', $this->oset  ) . $after : sprintf( '%s%s [post_date] %s [post_author_posts_link] [post_edit]%s', $before, __('On','catloop'), __('By','catloop'), $after );
 
 		} else {
 
-			$metabar = ( ploption( 'metabar_standard' ) ) ? $before . ploption( 'metabar_standard' ) . $after : sprintf( '%s%s [post_author_posts_link] %s [post_date] &middot; [post_comments] &middot; %s [post_categories] [post_edit]%s', $before, __('By','catloop'), __('On','catloop'), __('In','catloop'), $after);
+			$metabar = ( ploption( 'metabar_standard', $this->oset  ) ) ? $before . ploption( 'metabar_standard', $this->oset  ) . $after : sprintf( '%s%s [post_author_posts_link] %s [post_date] &middot; [post_comments] &middot; %s [post_categories] [post_edit]%s', $before, __('By','catloop'), __('On','catloop'), __('In','catloop'), $after);
 
 		}
 		add_filter('pagelines_post_metabar', 'do_shortcode', 20);
@@ -837,8 +825,8 @@ function catloop_get_post_title( $format = '' ){
 
 
 function catloop_get_continue_reading_link($post_id){
-		$cr_link = ploption('continue_reading_text');
-		$cr_class = ploption('continue_reading_classes'); //Get custom read more classes
+		$cr_link = ploption('continue_reading_text', $this->oset );
+		$cr_class = ploption('continue_reading_classes', $this->oset ); //Get custom read more classes
 		$this->continue_reading = ($cr_link) ? $cr_link : __('Read More &raquo;', 'catloop');
 		$link = sprintf(
 			'<a class="continue_reading_link %s" data-sync="continue_reading_text" href="%s" title="%s %s">%s</a>',
@@ -855,7 +843,7 @@ function catloop_get_continue_reading_link($post_id){
 function catloop_show_thumb($post = null, $location = null){
 		global $post;
 		$thumb = has_post_thumbnail($post->ID);
-		if(ploption('hide_thumb') || (! $thumb))
+		if(ploption('hide_thumb', $this->oset ) || (! $thumb))
 			return false;
 		else
 			return true;
@@ -864,7 +852,7 @@ function catloop_show_thumb($post = null, $location = null){
 
 function catloop_show_excerpt( $post = null ){
 
-	if( ploption('hide_excerpt'))
+	if( ploption('hide_excerpt', $this->oset ))
 		return false;
 	else
 		return true;
@@ -877,7 +865,7 @@ function catloop_show_content($post = null){
 	if( is_admin() )
 		return true;
 
-	elseif(ploption('show_content'))
+	elseif(ploption('show_content', $this->oset ))
 		return true;
 
 	else
@@ -888,7 +876,7 @@ function catloop_show_content($post = null){
 	
 function catloop_show_clip($count, $paged){
 
-		if(ploption('blog_layout_mode') != 'magazine')
+		if(ploption('blog_layout_mode', $this->oset ) != 'magazine')
 			return false;
 		else
 			return true;
