@@ -35,13 +35,11 @@ function before_section_template( $location = '' ) {
 							'selectvalues'	=> array(
 									'catloop_heading' => array(
 											'inputlabel' => __( 'Clone Heading', 'catloop'),
-											'default' => 'This Is My Clone Heading',
 											'type'=> 'text',
 											'size'=> 'big',
 											),
 									'catloop_subhead' => array(
 											'inputlabel' => __( 'Clone Description', 'catloop'),
-											'default' =>'This Is My Clone Sub-Heading',
 											'type'=> 'textarea',
 											),
 									'head_alignment' => array(
@@ -335,7 +333,7 @@ function section_template($clone_id) {
 		
 		$offby = ploption( 'offset', $this->oset ) ? ploption( 'offset', $this->oset ) : '';
 			
-		
+		$authors = ploption( 'authors', $this->oset ) ? ploption( 'authors', $this->oset ) : '';
 		//Make conversions to avoid errors and warnings
 		if (isset($category)) {
 		
@@ -359,6 +357,7 @@ function section_template($clone_id) {
 		$args = array(
 			'cat'        		=> $idList,
 			'category__not_in'  	=> $idListexclude,
+			'author'		=> $authors,
 			'order'           	=> $order,
 			'paged' 		=> $paged, 
 			'page' 			=> $paged, 
@@ -372,6 +371,7 @@ function section_template($clone_id) {
 		$args = array(
 			'cat'      		=> $idList,
 			'category__not_in'  	=> $idListexclude,
+			'author'		=> $authors,
 			'order'           	=> $order,
 			'paged' 		=> $paged, 
 			'page' 			=> $paged, 
@@ -625,8 +625,8 @@ return apply_filters('wp_trim_excerpt', $text, $raw_excerpt);
 	}		
 
 function catloop_section_heading(){
-	$catloop_heading = ploption( 'catloop_heading', $this->oset ) ? ploption( 'catloop_heading', $this->oset ) : 'CatLoop Heading';
-		$catloop_subhead = ploption( 'catloop_subhead', $this->oset ) ? ploption( 'catloop_subhead', $this->oset ) : 'CatLoop Description';
+	$catloop_heading = ploption( 'catloop_heading', $this->oset ) ? ploption( 'catloop_heading', $this->oset ) : '';
+		$catloop_subhead = ploption( 'catloop_subhead', $this->oset ) ? ploption( 'catloop_subhead', $this->oset ) : '';
 		$catloop_alignment = ploption( 'head_alignment', $this->oset ) ? ploption( 'head_alignment', $this->oset ) : 'left';
 		if ($catloop_heading && !$catloop_subhead) {
 			?>
@@ -642,6 +642,9 @@ function catloop_section_heading(){
 			<div class="catloop-subhead" data-sync="catloop_subhead" style="text-align: <?php echo $catloop_alignment?>"><?php echo $catloop_subhead ?></div>
 			</div>
 			<?php
+		}
+		if (!$catloop_heading && !$catloop_subhead) {
+			return; //do nothing
 		}
 }		
 
